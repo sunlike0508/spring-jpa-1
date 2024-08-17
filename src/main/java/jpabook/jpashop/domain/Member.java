@@ -20,7 +20,7 @@ public class Member {
     @Id
     @GeneratedValue
     private Long id;
-    private String username;
+    private String name;
 
     @Enumerated
     private Address address;
@@ -28,5 +28,5 @@ public class Member {
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
-    
+
 }
