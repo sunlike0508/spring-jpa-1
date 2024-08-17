@@ -13,6 +13,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.ManyToMany;
 import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dType")
+@DiscriminatorColumn(name = "dtype")
 public abstract class Item {
 
     @Id
@@ -34,4 +35,19 @@ public abstract class Item {
 
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
     private List<Category> categories = new ArrayList<>();
+
+
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+
+    public void removeStock(int quantity) {
+
+        if(stockQuantity < quantity) {
+            throw new NotEnoughStockException("need more stock");
+        }
+
+        this.stockQuantity -= quantity;
+    }
 }

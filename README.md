@@ -26,7 +26,7 @@ OnetoOne인 경우 양쪽에 외래키 어느곳에서 관리해도 된다.
     3) JOINED
 
 * @DiscriminatorColumn, @DiscriminatorValue
-  @DiscriminatorColumn(name = "dType")
+  @DiscriminatorColumn(name = "dtype")
 
 * @ManytoMany
   @ManytoMany는 싦무에서 쓰지말자. 시간, 작성자 등등 여러 필드 들어가기 위한 수정이 안된다.
