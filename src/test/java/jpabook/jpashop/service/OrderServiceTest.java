@@ -34,7 +34,9 @@ class OrderServiceTest {
     void order() {
         Member member = createMember();
 
-        Book book = createBook("JPA 책", 10000, 10);
+        Book book = Book.createBook("JPA 책", 10000, 10);
+
+        em.persist(book);
 
         int orderCount = 2;
         long orderId = orderService.order(member.getId(), book.getId(), orderCount);
@@ -43,19 +45,9 @@ class OrderServiceTest {
 
         em.flush();
 
-        assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.ORDER);
+        assertThat(order.getStatus()).isEqualTo(OrderStatus.ORDER);
         assertThat(order.getTotalPrice()).isEqualTo(20000);
         assertThat(book.getStockQuantity()).isEqualTo(8);
-    }
-
-
-    private Book createBook(String name, int price, int count) {
-        Book book = new Book();
-        book.setName(name);
-        book.setPrice(price);
-        book.setStockQuantity(count);
-        em.persist(book);
-        return book;
     }
 
 
@@ -74,7 +66,9 @@ class OrderServiceTest {
 
         Member member = createMember();
 
-        Book book = createBook("JPA 취소", 10000, 10);
+        Book book = Book.createBook("JPA 취소", 10000, 10);
+
+        em.persist(book);
 
         int orderCount = 2;
 
@@ -84,7 +78,7 @@ class OrderServiceTest {
 
         Order order = orderRepository.findOne(orderId);
 
-        assertThat(order.getOrderStatus()).isEqualTo(OrderStatus.CANCEL);
+        assertThat(order.getStatus()).isEqualTo(OrderStatus.CANCEL);
         assertThat(book.getStockQuantity()).isEqualTo(10);
     }
 
@@ -95,7 +89,9 @@ class OrderServiceTest {
 
         Member member = createMember();
 
-        Book book = createBook("JPA 책", 1000, 10);
+        Book book = Book.createBook("JPA 책", 1000, 10);
+
+        em.persist(book);
 
         int orderCount = 11;
 

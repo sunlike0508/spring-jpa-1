@@ -14,6 +14,7 @@ public class ItemRepository {
     private final EntityManager em;
 
 
+    // 병함
     public void save(Item item) {
         if(item.getId() == null) {
             em.persist(item);
