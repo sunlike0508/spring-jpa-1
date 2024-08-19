@@ -88,7 +88,7 @@ class Test {
 
 ### 병합
 
-![](../../Desktop/Screenshot 2024-08-17 at 21.53.28.png)
+<img width="910" alt="Screenshot 2024-08-17 at 21 53 28" src="https://github.com/user-attachments/assets/33d13011-6c89-4e0b-aabc-f56234dc0c99">
 
 ##### 병합 순서
 
